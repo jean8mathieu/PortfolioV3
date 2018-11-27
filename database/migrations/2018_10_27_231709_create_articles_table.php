@@ -15,6 +15,7 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->string('title', 100);
             $table->string('short_description', 250);
             $table->text('description');
@@ -22,6 +23,8 @@ class CreateArticlesTable extends Migration
             $table->string('image-small', '100');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

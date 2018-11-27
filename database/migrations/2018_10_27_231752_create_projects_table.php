@@ -15,6 +15,7 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->string('title', 100);
             $table->string('short_description', 250);
             $table->text('description');
@@ -23,6 +24,8 @@ class CreateProjectsTable extends Migration
             $table->string('github', '100');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

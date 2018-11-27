@@ -7,7 +7,7 @@
     <title>JMDev - Admin - @yield('title')</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
-<body>
+<body class="bg-dark">
     @include('shared.navbar-admin')
     @yield('content')
     <script src="/js/jquery.min.js"></script>

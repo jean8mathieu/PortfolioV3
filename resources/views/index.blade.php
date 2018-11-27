@@ -33,10 +33,10 @@
     </div>
 
     <div class="container">
-        <div class="row">
+        <div class="row d-flex justify-content-center">
             @for ($i = 0; $i < 11; $i++)
-                <div class="col-md-4 mt-5">
-                    <div class="card" style="width: 18rem;">
+                <div class="col-lg-3 col-md-6 col-12 mt-5">
+                    <div class="card w-100">
                         <img class="card-img-top" src="https://scontent.fymq3-1.fna.fbcdn.net/v/t1.0-9/22540123_1704518592925587_1188637553387241942_n.jpg?_nc_cat=101&_nc_ht=scontent.fymq3-1.fna&oh=9c0090d9ab80f64a33047f4c8e4a99ac&oe=5C84711A" alt="Project Images">
                         <div class="card-body">
                             <h5 class="card-title">Card title</h5>
