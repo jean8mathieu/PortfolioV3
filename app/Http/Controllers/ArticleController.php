@@ -4,67 +4,39 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class ArticleController extends Controller
 {
     /**
-     * Get the list of article
+     * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
-    public function getList()
+    public function index()
     {
         $articles = Article::all();
         return view("admin.article.list", ['articles' => $articles]);
     }
 
     /**
-     * Create an article
+     * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
-    public function getCreate()
+    public function create()
     {
         return view("admin.article.createUpdate");
     }
 
     /**
-     * Edit an article
+     * Store a newly created resource in storage.
      *
-     * @param Article $article
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
      */
-    public function getEdit(Article $article)
+    public function store(Request $request)
     {
-        return view("admin.article.createUpdate", ['article' => $article]);
-    }
-
-    /**
-     * Create or Update the Article into the Database
-     *
-     * @param Request $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|Response
-     */
-    public function postUpdate(Request $request)
-    {
-        //If ID exist article exist
-        if (isset($request->id) && $request->id > 0) {
-            $article = Article::find($request->id);
-
-            if ($article) {
-                if ($article->update([
-                    'title' => $request->title,
-                    'description' => $request->description,
-                    'short_description' => $request->shortDescription
-                ])) {
-                    return Response(['error' => false, 'message' => 'Article updated'], 200);
-                }
-            } else {
-                return Response(['error' => true, 'message' => 'Article not found'], 404);
-            }
-        } else {
-            //Create the article
+        try {
             if (Article::create([
                 'title' => $request->title,
                 'description' => $request->description,
@@ -72,10 +44,75 @@ class ArticleController extends Controller
             ])) {
                 return Response(['error' => false, 'message' => 'Article created'], 200);
             } else {
-                return Response(['error' => true, 'message' => 'There was an issue while creating the article'], 404);
+                return Response(['error' => true, 'message' => 'There was an issue while creating the article'], 500);
             }
+        } catch (\Exception $e) {
+            return Response(['error' => true, 'message' => 'There was an issue while creating the article'], 500);
         }
+    }
 
-        return Response(['error' => true, 'message' => 'Looks like you took the wrong turn...'], 404);
+    /**
+     * Display the specified resource.
+     *
+     * @param  Article $article
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Article $article)
+    {
+        return Response(['data' => $article], 200);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Article $article)
+    {
+        return view("admin.article.createUpdate", ['article' => $article]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  Article $article
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Article $article)
+    {
+        try {
+            if ($article->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'short_description' => $request->shortDescription
+            ])) {
+                return Response(['error' => false, 'message' => 'Article updated'], 200);
+            } else {
+                return Response(['error' => true, 'message' => "Article couldn't be updated. Please try again..."], 500);
+            }
+        } catch (\Exception $e) {
+            return Response(['error' => true, 'message' => "Article couldn't be updated. Please try again..."], 500);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  Article $article
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Article $article)
+    {
+        try {
+            if ($article->delete()) {
+                return Response(['error' => false, 'message' => 'Article Deleted!'], 200);
+            } else {
+                return Response(['error' => true, 'message' => 'We could not delete the article. Please try again...'], 500);
+            }
+        } catch (\Exception $e) {
+            return Response(['error' => true, 'message' => 'We could not delete the article. Please try again...'], 500);
+        }
     }
 }

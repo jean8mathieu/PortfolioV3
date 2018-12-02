@@ -33,8 +33,9 @@
     </div>
 
     <div class="container">
+        <h1 class="text-center">Latest code projects</h1>
         <div class="row d-flex justify-content-center">
-            @for ($i = 0; $i < 11; $i++)
+            @for ($i = 0; $i < 7; $i++)
                 <div class="col-lg-3 col-md-6 col-12 mt-5">
                     <div class="card w-100">
                         <img class="card-img-top" src="https://scontent.fymq3-1.fna.fbcdn.net/v/t1.0-9/22540123_1704518592925587_1188637553387241942_n.jpg?_nc_cat=101&_nc_ht=scontent.fymq3-1.fna&oh=9c0090d9ab80f64a33047f4c8e4a99ac&oe=5C84711A" alt="Project Images">
@@ -48,5 +49,7 @@
                 </div>
             @endfor
         </div>
+
+        <hr>
     </div>
 @endsection
