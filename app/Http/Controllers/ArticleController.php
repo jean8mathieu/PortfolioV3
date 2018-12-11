@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -36,18 +37,24 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        print_r($request->all());
+
+
         try {
             if (Article::create([
                 'title' => $request->title,
                 'description' => $request->description,
-                'short_description' => $request->shortDescription
+                'short_description' => $request->shortDescription,
+                'user_id' => Auth::user()->id,
+                'image-large' => 'http://www.jmdev.ca/v2/img/j-m2.jpg',
+                'image-small' => 'http://www.jmdev.ca/v2/img/j-m2.jpg'
             ])) {
                 return Response(['error' => false, 'message' => 'Article created'], 200);
             } else {
                 return Response(['error' => true, 'message' => 'There was an issue while creating the article'], 500);
             }
         } catch (\Exception $e) {
-            return Response(['error' => true, 'message' => 'There was an issue while creating the article'], 500);
+            return Response(['error' => true, 'message' => 'There was an issue while creating the article. ' . $e->getMessage()], 500);
         }
     }
 

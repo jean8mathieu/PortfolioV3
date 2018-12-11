@@ -23,10 +23,12 @@
             <tr>
                 @forelse($articles as $article)
                     <td>{{ $article->id }}</td>
-                    <td>{{ $article->user->name }}</td>
+                    <td>{{ $article->user->name  }}</td>
                     <td>{{ $article->title }}</td>
                     <td>{{ $article->created_at }}</td>
                     <td>{{ $article->updated_at }}</td>
+                    <td><a href="{{ route('article.edit', [$article->id]) }}" class="btn btn-warning">Edit</a></td>
+                    <td><button class="btn btn-danger" data-href="{{ route('article.destroy', [$article->id]) }}">Delete</button></td>
                 @empty
                     <td colspan="100"><h4 class="text-center">There is not article yet</h4></td>
                 @endforelse

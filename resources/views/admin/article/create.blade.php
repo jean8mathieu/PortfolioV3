@@ -22,21 +22,21 @@
             <div class="mt-3"></div>
 
             <label>Description:</label>
-            <textarea placeholder="Description" class="form-control" rows="15" required></textarea>
+            <textarea placeholder="Description" name="description" class="form-control" rows="15" required></textarea>
 
             <div class="mt-3"></div>
 
             <label>Small image <small>Display on the homepage</small></label>
-            <input type="file" class="form-control">
+            <input type="file" name="smallImage" class="form-control">
 
             <div class="mt-3"></div>
 
             <label>Large image <small>Display in the article</small></label>
-            <input type="file" class="form-control">
+            <input type="file" name="largeImage" class="form-control">
 
             <div class="mt-3"></div>
 
-            <button type="button" class="btn btn-primary w-100">Create</button>
+            <button type="submit" class="btn btn-primary w-100">Create</button>
         </form>
     </div>
 @endsection
