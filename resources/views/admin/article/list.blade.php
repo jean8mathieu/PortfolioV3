@@ -33,6 +33,6 @@
             </tr>
             </tbody>
         </table>
-        <a href="{{ route("articleCreate") }}" class="btn btn-success">Create an article</a>
+        <a href="{{ route("article.create") }}" class="btn btn-success">Create an article</a>
     </div>
 @endsection

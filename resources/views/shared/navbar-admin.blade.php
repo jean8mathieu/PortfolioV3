@@ -11,9 +11,9 @@
                     Article
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('articleList') }}">List</a>
+                    <a class="dropdown-item" href="{{ route('article.index') }}">List</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ route("articleCreate") }}">Create</a>
+                    <a class="dropdown-item" href="{{ route("article.create") }}">Create</a>
                 </div>
             </li>
 
@@ -22,9 +22,9 @@
                     Project
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('projectList') }}">List</a>
+                    <a class="dropdown-item" href="{{ route('project.index') }}">List</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ route('projectCreate') }}">Create</a>
+                    <a class="dropdown-item" href="{{ route('project.create') }}">Create</a>
                 </div>
             </li>
 

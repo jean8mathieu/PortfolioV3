@@ -25,7 +25,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view("admin.project.createUpdate");
+        return view("admin.project.create");
     }
 
     /**
@@ -70,7 +70,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view("admin.project.createUpdate", ['projects' => $project]);
+        return view("admin.project.update", ['projects' => $project]);
     }
 
     /**

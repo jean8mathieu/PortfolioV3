@@ -25,7 +25,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view("admin.article.createUpdate");
+        return view("admin.article.create");
     }
 
     /**
@@ -70,7 +70,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        return view("admin.article.createUpdate", ['article' => $article]);
+        return view("admin.article.edit", ['article' => $article]);
     }
 
     /**
