@@ -41,3 +41,5 @@ Route::group([
     });
 });
 
+
+Route::get('test', 'AdminController@test')->name('test');

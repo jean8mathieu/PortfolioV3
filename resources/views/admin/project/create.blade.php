@@ -8,7 +8,7 @@
     <div class="container text-white">
         <h2 class="text-center">Creating a Project</h2>
 
-        <form id="createProject" method="POST" action="{{ route("project.store") }}">
+        <form id="createProject" method="POST" action="{{ route("project.store") }}" enctype="multipart/form-data">
             @csrf
 
             <label for="title">Title:</label>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -37,8 +38,27 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        print_r($request->all());
+        /*$this->validate([
+            'largeImage' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'smallImage' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
+        ]);*/
 
+        $imageFile = [];
+
+        foreach (['largeImage', 'smallImage'] as $value) {
+            $file = $request->file($value);
+            $imageFileName = time() . "-{$value}." . $file->getClientOriginalExtension();
+            $path = "storage/images/";
+
+            if($file->move(public_path($path), $imageFileName)) {
+                $imageFile[$value] = $path . $imageFileName;
+            } else {
+                //Error
+                return Response(['error' => true, 'message' => "The image wasn't successfully saved"], 500);
+            }
+
+
+        }
 
         try {
             if (Article::create([
@@ -46,8 +66,8 @@ class ArticleController extends Controller
                 'description' => $request->description,
                 'short_description' => $request->shortDescription,
                 'user_id' => Auth::user()->id,
-                'image-large' => 'http://www.jmdev.ca/v2/img/j-m2.jpg',
-                'image-small' => 'http://www.jmdev.ca/v2/img/j-m2.jpg'
+                'image-large' => $imageFile['largeImage'],
+                'image-small' => $imageFile['smallImage']
             ])) {
                 return Response(['error' => false, 'message' => 'Article created'], 200);
             } else {

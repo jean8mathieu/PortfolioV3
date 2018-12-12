@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -59,6 +60,11 @@ class AdminController extends Controller
     function getLogout(){
         Auth::logout();
         return Redirect::to('/');
+    }
+
+    function test(){
+        echo "<img src='" . asset('storage/images/1544581382-largeImage.png') . "'>";
+
     }
 
 }

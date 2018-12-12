@@ -8,7 +8,7 @@
     <div class="container text-white">
         <h2 class="text-center">Updating an Article</h2>
 
-        <form id="updateArticle" method="PUT" action="{{ route("project.update", [$article->id]) }}">
+        <form id="updateArticle" method="PUT" action="{{ route("project.update", [$article->id]) }}" enctype="multipart/form-data">
             @csrf
 
             <label for="title">Title:</label>
